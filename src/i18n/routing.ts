@@ -7,6 +7,9 @@ export const routing = defineRouting({
   locales,
   defaultLocale: "lt",
   localePrefix: "as-needed",
+  // The URL alone determines the language (better for SEO and predictability);
+  // visitors switch languages with the header control.
+  localeDetection: false,
   pathnames: {
     "/": "/",
     "/catalog": {

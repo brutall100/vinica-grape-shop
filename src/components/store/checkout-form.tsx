@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import { useHydrated } from "@/lib/use-hydrated";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useCart, cartSubtotal } from "@/lib/cart-store";
@@ -27,8 +28,7 @@ export function CheckoutForm({ prices }: { prices: ShippingPrices }) {
   const tc = useTranslations("cart");
   const locale = useLocale();
   const { items, clear } = useCart();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const hydrated = useHydrated();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -59,7 +59,7 @@ export function CheckoutForm({ prices }: { prices: ShippingPrices }) {
     { value: "COURIER", label: t("shippingCourier"), icon: Truck, price: prices.courierCents },
   ];
 
-  if (!mounted) return null;
+  if (!hydrated) return null;
 
   if (items.length === 0) {
     return (

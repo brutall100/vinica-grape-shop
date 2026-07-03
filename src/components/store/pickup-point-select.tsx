@@ -18,26 +18,27 @@ export function PickupPointSelect({
   onSelect: (point: Point) => void;
 }) {
   const t = useTranslations("checkout");
-  const [points, setPoints] = useState<Point[] | null>(null);
+  const [loaded, setLoaded] = useState<{ provider: string; points: Point[] } | null>(null);
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
-    setPoints(null);
     fetch(`/api/pickup-points?provider=${provider}`)
       .then((r) => r.json())
       .then((data: Point[]) => {
-        if (!cancelled) setPoints(data);
+        if (!cancelled) setLoaded({ provider, points: data });
       })
       .catch(() => {
-        if (!cancelled) setPoints([]);
+        if (!cancelled) setLoaded({ provider, points: [] });
       });
     return () => {
       cancelled = true;
     };
   }, [provider]);
 
+  // while the newly selected provider's list is loading, show the loading state
+  const points = loaded?.provider === provider ? loaded.points : null;
   const selected = points?.find((p) => p.id === value) ?? null;
 
   const filtered = useMemo(() => {

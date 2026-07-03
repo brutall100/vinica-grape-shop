@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useCart, cartSubtotal } from "@/lib/cart-store";
+import { useHydrated } from "@/lib/use-hydrated";
 import { formatPrice } from "@/lib/format";
 import { buttonClasses } from "@/components/ui/button";
 import { Minus, Plus, Trash2, ShoppingBasket, ArrowRight } from "lucide-react";
@@ -13,10 +13,9 @@ export function CartView({ locale }: { locale: string }) {
   const t = useTranslations("cart");
   const tc = useTranslations("common");
   const { items, setQuantity, remove } = useCart();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const hydrated = useHydrated();
 
-  if (!mounted) {
+  if (!hydrated) {
     return <div className="container-shop py-12 text-stone-400">{tc("loading")}</div>;
   }
 

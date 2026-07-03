@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { ShoppingBasket, Menu, X } from "lucide-react";
 import { useCart, cartCount } from "@/lib/cart-store";
+import { useHydrated } from "@/lib/use-hydrated";
 import { LanguageSwitcher } from "./language-switcher";
 import { GrapeMark } from "./logo";
 import { cn } from "@/lib/utils";
@@ -18,9 +19,8 @@ const navItems = [
 function CartLink() {
   const t = useTranslations("nav");
   const items = useCart((s) => s.items);
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  const count = mounted ? cartCount(items) : 0;
+  const hydrated = useHydrated();
+  const count = hydrated ? cartCount(items) : 0;
 
   return (
     <Link
@@ -44,7 +44,12 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => setMenuOpen(false), [pathname]);
+  // close the mobile menu when navigation changes the path
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setMenuOpen(false);
+  }
 
   return (
     <header className="sticky top-0 z-40 border-b border-stone-200/70 bg-cream/85 backdrop-blur-md">
