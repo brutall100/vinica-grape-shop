@@ -6,10 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:seed": "prisma db seed",
+    "db:migrate": "prisma migrate dev",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "@prisma/client": "^7.8.0",
+    "@prisma/client": "^6.19.3",
     "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "lucide-react": "^1.23.0",
@@ -34,9 +38,12 @@
     "eslint-config-next": "16.2.10",
     "prettier": "^3.9.4",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "prisma": "^7.8.0",
+    "prisma": "^6.19.3",
     "tailwindcss": "^4",
     "tsx": "^4.22.5",
     "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }
