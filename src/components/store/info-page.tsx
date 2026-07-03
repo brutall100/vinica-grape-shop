@@ -1,9 +1,19 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
+import { localizedAlternates } from "@/lib/seo";
 
-export async function infoMetadata(locale: string, metaKey: string): Promise<Metadata> {
+type InfoHref = "/about" | "/delivery" | "/privacy" | "/terms";
+
+export async function infoMetadata(
+  locale: string,
+  metaKey: string,
+  href?: InfoHref,
+): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "meta" });
-  return { title: t(metaKey) };
+  return {
+    title: t(metaKey),
+    ...(href ? { alternates: localizedAlternates(href, locale) } : {}),
+  };
 }
 
 export async function InfoPage({

@@ -61,9 +61,33 @@ export default async function LocaleLayout({
   if (!hasLocale(locales, locale)) notFound();
   setRequestLocale(locale as Locale);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Vinica",
+    url: siteUrl,
+    logo: `${siteUrl}/favicon.ico`,
+  };
+  const webSiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Vinica",
+    url: siteUrl,
+    inLanguage: ["lt", "en", "ru", "pl"],
+  };
+
   return (
     <html lang={locale} className={`${manrope.variable} ${fraunces.variable}`}>
       <body className="flex min-h-screen flex-col font-sans">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }}
+        />
         <NextIntlClientProvider>
           <Header />
           <main className="flex-1">{children}</main>

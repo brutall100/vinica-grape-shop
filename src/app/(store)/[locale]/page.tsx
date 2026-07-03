@@ -1,11 +1,22 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { localizedAlternates } from "@/lib/seo";
 import { getFeaturedProducts, getCategories } from "@/lib/products";
 import { getStoreSettings } from "@/lib/settings";
 import { ProductCard } from "@/components/store/product-card";
 import { pickLocale } from "@/lib/localized";
 import { buttonClasses } from "@/components/ui/button";
 import { Sprout, ShieldCheck, MessageCircleHeart, PackageCheck, ArrowRight } from "lucide-react";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return { alternates: localizedAlternates("/", locale) };
+}
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

@@ -4,6 +4,7 @@ import { getCatalogProducts, getCategories, parseCatalogFilters } from "@/lib/pr
 import { ProductCard } from "@/components/store/product-card";
 import { CatalogFilters } from "@/components/store/catalog-filters";
 import { pickLocale } from "@/lib/localized";
+import { localizedAlternates } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -16,6 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("catalogTitle"),
     description: t("catalogDescription"),
+    alternates: localizedAlternates("/catalog", locale),
   };
 }
 

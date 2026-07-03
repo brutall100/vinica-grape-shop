@@ -4,7 +4,7 @@ type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
-  return infoMetadata(locale, "privacyTitle");
+  return infoMetadata(locale, "privacyTitle", "/privacy");
 }
 
 export default async function PrivacyPage({ params }: Props) {

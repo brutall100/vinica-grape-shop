@@ -92,11 +92,35 @@ export default async function ProductPage({ params }: Props) {
     },
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: t("breadcrumbHome"),
+        item: siteUrl + getPathname({ locale: locale as never, href: "/" }),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: t("breadcrumbCatalog"),
+        item: siteUrl + getPathname({ locale: locale as never, href: "/catalog" }),
+      },
+      { "@type": "ListItem", position: 3, name, item: productUrl },
+    ],
+  };
+
   return (
     <div className="container-shop py-8 sm:py-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       {/* Breadcrumbs */}
