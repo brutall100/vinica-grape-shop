@@ -23,21 +23,20 @@ const statusLabels: Record<string, string> = {
 };
 
 export default async function AdminDashboardPage() {
-  const [orderCount, newOrders, revenue, lowStock, recentOrders] =
-    await Promise.all([
-      prisma.order.count(),
-      prisma.order.count({ where: { status: "PAID" } }),
-      prisma.order.aggregate({
-        where: { status: { in: ["PAID", "SHIPPED", "COMPLETED"] } },
-        _sum: { totalCents: true },
-      }),
-      prisma.product.count({ where: { published: true, stock: { lte: 5 } } }),
-      prisma.order.findMany({
-        orderBy: { createdAt: "desc" },
-        take: 8,
-        include: { items: true },
-      }),
-    ]);
+  const [orderCount, newOrders, revenue, lowStock, recentOrders] = await Promise.all([
+    prisma.order.count(),
+    prisma.order.count({ where: { status: "PAID" } }),
+    prisma.order.aggregate({
+      where: { status: { in: ["PAID", "SHIPPED", "COMPLETED"] } },
+      _sum: { totalCents: true },
+    }),
+    prisma.product.count({ where: { published: true, stock: { lte: 5 } } }),
+    prisma.order.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 8,
+      include: { items: true },
+    }),
+  ]);
 
   const stats = [
     {

@@ -6,6 +6,9 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing, locales, type Locale } from "@/i18n/routing";
 import { Header } from "@/components/store/header";
 import { Footer } from "@/components/store/footer";
+import { LivingBackground } from "@/components/effects/living-background";
+import { ThemeScript } from "@/components/effects/theme-script";
+import { UiEffects } from "@/components/effects/ui-effects";
 import "@/app/globals.css";
 
 const manrope = Manrope({
@@ -60,6 +63,7 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!hasLocale(locales, locale)) notFound();
   setRequestLocale(locale as Locale);
+  const tc = await getTranslations({ locale, namespace: "common" });
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   const organizationJsonLd = {
@@ -67,7 +71,7 @@ export default async function LocaleLayout({
     "@type": "Organization",
     name: "Vinica",
     url: siteUrl,
-    logo: `${siteUrl}/favicon.ico`,
+    logo: `${siteUrl}/icon.svg`,
   };
   const webSiteJsonLd = {
     "@context": "https://schema.org",
@@ -78,8 +82,20 @@ export default async function LocaleLayout({
   };
 
   return (
-    <html lang={locale} className={`${manrope.variable} ${fraunces.variable}`}>
+    <html
+      lang={locale}
+      data-theme="light"
+      className={`${manrope.variable} ${fraunces.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <ThemeScript />
+      </head>
       <body className="flex min-h-screen flex-col font-sans">
+        <a href="#main" className="skip-link">
+          {tc("skipToContent")}
+        </a>
+        <LivingBackground />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
@@ -90,9 +106,12 @@ export default async function LocaleLayout({
         />
         <NextIntlClientProvider>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
+            {children}
+          </main>
           <Footer />
         </NextIntlClientProvider>
+        <UiEffects />
       </body>
     </html>
   );

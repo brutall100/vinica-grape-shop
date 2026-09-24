@@ -10,11 +10,7 @@ function toLocalized(value: unknown): Record<"lt" | "en" | "ru" | "pl", string> 
   return { lt: map.lt ?? "", en: map.en ?? "", ru: map.ru ?? "", pl: map.pl ?? "" };
 }
 
-export default async function EditProductPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const [product, categories] = await Promise.all([
     prisma.product.findUnique({

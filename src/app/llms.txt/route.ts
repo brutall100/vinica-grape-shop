@@ -23,7 +23,10 @@ export async function GET() {
     .map((p) => {
       const url =
         siteUrl +
-        getPathname({ locale: "lt", href: { pathname: "/products/[slug]", params: { slug: p.slug } } });
+        getPathname({
+          locale: "lt",
+          href: { pathname: "/products/[slug]", params: { slug: p.slug } },
+        });
       const price = ((p.salePriceCents ?? p.priceCents) / 100).toFixed(2);
       const attrs = [
         p.frostResistance != null ? `atsparumas šalčiui iki ${p.frostResistance}°C` : null,
@@ -38,7 +41,8 @@ export async function GET() {
   const categoryLines = categories
     .map((c) => {
       const url =
-        siteUrl + getPathname({ locale: "lt", href: { pathname: "/catalog", query: { category: c.slug } } });
+        siteUrl +
+        getPathname({ locale: "lt", href: { pathname: "/catalog", query: { category: c.slug } } });
       return `- [${pickLocale(c.name, "lt")}](${url})`;
     })
     .join("\n");

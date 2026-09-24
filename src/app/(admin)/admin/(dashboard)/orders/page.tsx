@@ -113,9 +113,7 @@ export default async function AdminOrdersPage({
                   <td className="px-4 py-3 text-stone-600">
                     {shippingLabels[order.shippingMethod]}
                   </td>
-                  <td className="px-4 py-3 font-semibold">
-                    {formatPrice(order.totalCents, "lt")}
-                  </td>
+                  <td className="px-4 py-3 font-semibold">{formatPrice(order.totalCents, "lt")}</td>
                   <td className="px-4 py-3">
                     <Badge variant={statusVariant[order.status]}>
                       {statusLabels[order.status]}

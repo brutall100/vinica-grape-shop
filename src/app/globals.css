@@ -1,44 +1,279 @@
 @import "tailwindcss";
+@import "../styles/effects.css";
+@import "../styles/living-background.css";
 
-@theme {
-  /* Vine greens — primary brand colour */
-  --color-vine-50: #f5f8ee;
-  --color-vine-100: #e7efd9;
-  --color-vine-200: #d0e0b8;
-  --color-vine-300: #b0cb8e;
-  --color-vine-400: #91b569;
-  --color-vine-500: #74994b;
-  --color-vine-600: #597a38;
-  --color-vine-700: #465e2e;
-  --color-vine-800: #3a4c29;
-  --color-vine-900: #324126;
-  --color-vine-950: #182310;
+/* =====================================================================
+   PALETTE — "Vineyard Dawn"
+   Every colour in the app comes from the variables below.
+   Change a value here and the whole shop (and the live background)
+   follows. Dark mode redefines the same names further down.
+   ===================================================================== */
+:root {
+  color-scheme: light;
 
-  /* Wine burgundy — accent */
-  --color-wine-50: #fbf5f5;
-  --color-wine-100: #f6e9ea;
-  --color-wine-200: #efd6d8;
-  --color-wine-300: #e2b8bc;
-  --color-wine-400: #d09197;
-  --color-wine-500: #ba6a73;
-  --color-wine-600: #a24e59;
-  --color-wine-700: #873e48;
-  --color-wine-800: #713640;
-  --color-wine-900: #61313a;
-  --color-wine-950: #35171c;
+  /* Brand anchors */
+  --bg: #fbf6ec; /* page background — morning cream */
+  --surface: #ffffff; /* cards, panels, inputs */
+  --text: #2a2118; /* body text — warm soil brown */
+  --accent: #4f7a2b; /* vine green — buttons, links */
+  --accent-2: #6b2e5f; /* grape purple — badges, highlights */
 
-  /* Warm cream neutrals */
-  --color-cream: #faf8f4;
-  --color-cream-dark: #f3efe7;
+  /* Vine green scale (accent) */
+  --vine-50: #f3f7ea;
+  --vine-100: #e3edcf;
+  --vine-200: #c9dca6;
+  --vine-300: #a8c678;
+  --vine-400: #86ab52;
+  --vine-500: #6b9a3c;
+  --vine-600: #5c8a33;
+  --vine-700: var(--accent);
+  --vine-800: #3f6222;
+  --vine-900: #334f1d;
+  --vine-950: #1b2b0e;
+
+  /* Grape purple scale (second accent, class name "wine") */
+  --wine-50: #faf3f8;
+  --wine-100: #f3e3ef;
+  --wine-200: #e7c6df;
+  --wine-300: #d49dc7;
+  --wine-400: #b96fa8;
+  --wine-500: #9a4d89;
+  --wine-600: #823c73;
+  --wine-700: var(--accent-2);
+  --wine-800: #57254d;
+  --wine-900: #461f3f;
+  --wine-950: #2a1025;
+
+  /* Warm neutrals (class name "stone") */
+  --stone-50: #faf6ee;
+  --stone-100: #f2ece0;
+  --stone-200: #e4dccc;
+  --stone-300: #cfc5b1;
+  --stone-400: #7e7262;
+  --stone-500: #6b6052;
+  --stone-600: #5a5044;
+  --stone-700: #473f35;
+  --stone-800: #352e26;
+  --stone-900: var(--text);
+  --stone-950: #17110b;
+
+  /* Status colours */
+  --red-50: #fdf2f0;
+  --red-100: #fadcd6;
+  --red-600: #b42318;
+  --red-700: #912018;
+  --red-800: #7a1a12;
+  --amber-50: #fff8e6;
+  --amber-100: #fdecc0;
+  --amber-500: #d99a1e;
+  --amber-600: #b7791f;
+  --amber-700: #8f5b12;
+  --amber-800: #74490f;
+  --amber-900: #5c3a0c;
+  --green-100: #ddf0d5;
+  --green-800: #25612a;
+  --blue-100: #dceaf7;
+  --blue-800: #1e4e7c;
+
+  /* Deep panels that stay dark in both modes (footer, admin sidebar, CTA) */
+  --deep: #1f2a14;
+  --deep-grape: #4a1f42;
+  --on-deep: #f3eedf;
+  --on-deep-muted: #c9c2ae;
+  --on-deep-accent: #a8c678;
+
+  /* Live background */
+  --glow-sun: #f0c96a;
+  --glow-grape: #d49dc7;
+  --glow-strength: 0.45;
+  --leaf-1: #86ab52;
+  --leaf-2: #a8c678;
+  --leaf-3: #b96fa8;
+  --leaf-opacity: 0.45;
+  --pollen: #d9a93a;
+  --pollen-glow: transparent;
+  --trellis: rgb(79 122 43 / 0.07);
+
+  /* Hero grape bunch */
+  --berry-1: #823c73;
+  --berry-2: #6b2e5f;
+  --berry-3: #461f3f;
+  --berry-shine: rgb(255 255 255 / 0.3);
+
+  /* UI details */
+  --focus: #6b2e5f;
+  --shadow: rgb(42 33 24 / 0.12);
+  --shadow-accent: rgb(79 122 43 / 0.28);
+  --ripple: rgb(255 255 255 / 0.45);
+  --panel: rgb(255 255 255 / 0.82);
+}
+
+/* Dark mode — same palette, evening in the vineyard */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #141910;
+  --surface: #20281a;
+  --text: #f1ebdd;
+  --accent: #9cc46a;
+  --accent-2: #d08cc0;
+
+  --vine-50: #1a2413;
+  --vine-100: #243318;
+  --vine-200: #30451f;
+  --vine-300: #3f5b27;
+  --vine-400: #5e8537;
+  --vine-500: #7fa84e;
+  --vine-600: #92ba60;
+  --vine-800: #b5d68c;
+  --vine-900: #cfe5b2;
+  --vine-950: #e9f3dc;
+
+  --wine-50: #2a1426;
+  --wine-100: #3a1b34;
+  --wine-200: #4e2446;
+  --wine-300: #6a335f;
+  --wine-400: #8f4a81;
+  --wine-500: #a965a0;
+  --wine-600: #ba78b0;
+  --wine-800: #dda6d0;
+  --wine-900: #e6bfdd;
+  --wine-950: #f4e1ef;
+
+  --stone-50: #1a2015;
+  --stone-100: #262e1f;
+  --stone-200: #333c2a;
+  --stone-300: #4a5440;
+  --stone-400: #948c7a;
+  --stone-500: #aba491;
+  --stone-600: #c1baa8;
+  --stone-700: #d5cfbf;
+  --stone-800: #e3ddce;
+  --stone-950: #faf6ec;
+
+  --red-50: #2e1512;
+  --red-100: #45201a;
+  --red-600: #f08a7e;
+  --red-700: #f5a398;
+  --red-800: #f8bdb4;
+  --amber-50: #2a2008;
+  --amber-100: #3a2c0c;
+  --amber-500: #e0a93a;
+  --amber-600: #e8b85a;
+  --amber-700: #efc677;
+  --amber-800: #f4d595;
+  --amber-900: #f8e3b5;
+  --green-100: #1f3a1a;
+  --green-800: #a6db9c;
+  --blue-100: #172a3d;
+  --blue-800: #a5cbf0;
+
+  --deep: #0d1208;
+  --deep-grape: #2e1229;
+
+  --glow-sun: #b7902e;
+  --glow-grape: #8f4a81;
+  --glow-strength: 0.55;
+  --leaf-1: #5e8537;
+  --leaf-2: #7fa84e;
+  --leaf-3: #8f4a81;
+  --leaf-opacity: 0.5;
+  --pollen: #f2d27a;
+  --pollen-glow: rgb(242 210 122 / 0.8);
+  --trellis: rgb(156 196 106 / 0.06);
+
+  --berry-1: #b96fa8;
+  --berry-2: #9a4d89;
+  --berry-3: #6a335f;
+  --berry-shine: rgb(255 255 255 / 0.22);
+
+  --focus: #f0c96a;
+  --shadow: rgb(0 0 0 / 0.45);
+  --shadow-accent: rgb(156 196 106 / 0.25);
+  --ripple: rgb(20 25 16 / 0.35);
+  --panel: rgb(32 40 26 / 0.84);
+}
+
+/* Tailwind colour names point at the variables above (inline = resolved per element) */
+@theme inline {
+  --color-white: var(--surface);
+  --color-cream: var(--bg);
+  --color-cream-dark: var(--stone-100);
+
+  --color-vine-50: var(--vine-50);
+  --color-vine-100: var(--vine-100);
+  --color-vine-200: var(--vine-200);
+  --color-vine-300: var(--vine-300);
+  --color-vine-400: var(--vine-400);
+  --color-vine-500: var(--vine-500);
+  --color-vine-600: var(--vine-600);
+  --color-vine-700: var(--vine-700);
+  --color-vine-800: var(--vine-800);
+  --color-vine-900: var(--vine-900);
+  --color-vine-950: var(--vine-950);
+
+  --color-wine-50: var(--wine-50);
+  --color-wine-100: var(--wine-100);
+  --color-wine-200: var(--wine-200);
+  --color-wine-300: var(--wine-300);
+  --color-wine-400: var(--wine-400);
+  --color-wine-500: var(--wine-500);
+  --color-wine-600: var(--wine-600);
+  --color-wine-700: var(--wine-700);
+  --color-wine-800: var(--wine-800);
+  --color-wine-900: var(--wine-900);
+  --color-wine-950: var(--wine-950);
+
+  --color-stone-50: var(--stone-50);
+  --color-stone-100: var(--stone-100);
+  --color-stone-200: var(--stone-200);
+  --color-stone-300: var(--stone-300);
+  --color-stone-400: var(--stone-400);
+  --color-stone-500: var(--stone-500);
+  --color-stone-600: var(--stone-600);
+  --color-stone-700: var(--stone-700);
+  --color-stone-800: var(--stone-800);
+  --color-stone-900: var(--stone-900);
+  --color-stone-950: var(--stone-950);
+
+  --color-red-50: var(--red-50);
+  --color-red-100: var(--red-100);
+  --color-red-600: var(--red-600);
+  --color-red-700: var(--red-700);
+  --color-red-800: var(--red-800);
+  --color-amber-50: var(--amber-50);
+  --color-amber-100: var(--amber-100);
+  --color-amber-500: var(--amber-500);
+  --color-amber-600: var(--amber-600);
+  --color-amber-700: var(--amber-700);
+  --color-amber-800: var(--amber-800);
+  --color-amber-900: var(--amber-900);
+  --color-green-100: var(--green-100);
+  --color-green-800: var(--green-800);
+  --color-blue-100: var(--blue-100);
+  --color-blue-800: var(--blue-800);
+
+  --color-deep: var(--deep);
+  --color-deep-grape: var(--deep-grape);
+  --color-on-deep: var(--on-deep);
+  --color-on-deep-muted: var(--on-deep-muted);
+  --color-on-deep-accent: var(--on-deep-accent);
+  --color-panel: var(--panel);
 
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
 }
 
+html {
+  background-color: var(--bg);
+}
+
+/* The page colour lives on <html> only: a body background would paint
+   over the fixed live background (z-index: -1). */
 body {
-  background-color: var(--color-cream);
-  color: #1c1917;
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 
 @utility container-shop {

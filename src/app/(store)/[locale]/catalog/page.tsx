@@ -32,9 +32,7 @@ export default async function CatalogPage({ params, searchParams }: Props) {
   return (
     <div className="container-shop py-8 sm:py-12">
       <header className="mb-6">
-        <h1 className="font-display text-3xl font-bold text-stone-900 sm:text-4xl">
-          {t("title")}
-        </h1>
+        <h1 className="font-display text-3xl font-bold text-stone-900 sm:text-4xl">{t("title")}</h1>
         <p className="mt-2 text-stone-600">{t("subtitle")}</p>
       </header>
 

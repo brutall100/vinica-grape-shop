@@ -92,9 +92,7 @@ export default async function OrderPage({ params, searchParams }: Props) {
       </section>
 
       <section className="mt-4 rounded-2xl border border-stone-200 bg-white p-6 text-sm">
-        <h2 className="mb-2 font-display text-lg font-bold text-stone-900">
-          {t("shippingTitle")}
-        </h2>
+        <h2 className="mb-2 font-display text-lg font-bold text-stone-900">{t("shippingTitle")}</h2>
         <p className="text-stone-700">{destination}</p>
         <p className="mt-1 text-stone-500">
           {order.customerName} · {order.customerPhone}

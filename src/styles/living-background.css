@@ -1,0 +1,151 @@
+/* =====================================================================
+   LIVE BACKGROUND — "a morning breeze in the vineyard"
+   Layers (back to front):
+     1. two big, blurred glows — the rising sun and ripe grapes
+     2. a faint trellis texture — the wires vines climb on
+     3. falling, spinning vine leaves + floating pollen (fireflies at night)
+   Particles are created in living-background.tsx with random values.
+   Only transform and opacity are animated.
+   ===================================================================== */
+
+.living-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ---------- 1. Glows ---------- */
+.living-bg__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: var(--glow-strength);
+  will-change: transform;
+}
+.living-bg__glow--sun {
+  top: -18vmax;
+  right: -12vmax;
+  width: 55vmax;
+  height: 55vmax;
+  background: radial-gradient(circle, var(--glow-sun) 0%, transparent 70%);
+  animation: glow-drift-a 34s ease-in-out infinite alternate;
+}
+.living-bg__glow--grape {
+  bottom: -22vmax;
+  left: -16vmax;
+  width: 50vmax;
+  height: 50vmax;
+  background: radial-gradient(circle, var(--glow-grape) 0%, transparent 70%);
+  animation: glow-drift-b 41s ease-in-out infinite alternate;
+}
+@keyframes glow-drift-a {
+  to {
+    transform: translate3d(-8vmax, 10vmax, 0) scale(1.12);
+  }
+}
+@keyframes glow-drift-b {
+  to {
+    transform: translate3d(10vmax, -8vmax, 0) scale(0.92);
+  }
+}
+
+/* ---------- 2. Trellis texture ---------- */
+.living-bg__trellis {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(115deg, var(--trellis) 0 1px, transparent 1px 56px),
+    repeating-linear-gradient(65deg, var(--trellis) 0 1px, transparent 1px 56px);
+  mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 75%);
+}
+
+/* ---------- 3a. Falling vine leaves ---------- */
+.leaf {
+  position: absolute;
+  top: 0;
+  left: var(--x);
+  width: var(--size);
+  height: var(--size);
+  opacity: 0;
+  animation: leaf-fall var(--dur) linear var(--delay) infinite;
+  will-change: transform, opacity;
+}
+.leaf svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: var(--leaf-color);
+  animation: leaf-sway var(--sway-dur) ease-in-out var(--delay) infinite alternate;
+}
+@keyframes leaf-fall {
+  0% {
+    transform: translate3d(0, -12vh, 0);
+    opacity: 0;
+  }
+  8% {
+    opacity: var(--leaf-opacity);
+  }
+  88% {
+    opacity: var(--leaf-opacity);
+  }
+  100% {
+    transform: translate3d(var(--drift), 108vh, 0);
+    opacity: 0;
+  }
+}
+@keyframes leaf-sway {
+  from {
+    transform: translateX(calc(var(--sway) * -1)) rotate(var(--r0));
+  }
+  to {
+    transform: translateX(var(--sway)) rotate(calc(var(--r0) + var(--spin)));
+  }
+}
+
+/* ---------- 3b. Pollen motes (glowing fireflies in dark mode) ---------- */
+.mote {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: var(--pollen);
+  box-shadow: 0 0 calc(var(--size) * 3) var(--pollen-glow);
+  opacity: 0;
+  animation: mote-float var(--dur) ease-in-out var(--delay) infinite;
+  will-change: transform, opacity;
+}
+@keyframes mote-float {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.5);
+    opacity: 0;
+  }
+  25% {
+    opacity: var(--o);
+  }
+  50% {
+    transform: translate3d(calc(var(--drift) * 0.4), -14vh, 0) scale(1);
+    opacity: calc(var(--o) * 0.5);
+  }
+  75% {
+    opacity: var(--o);
+  }
+  100% {
+    transform: translate3d(var(--drift), -30vh, 0) scale(0.6);
+    opacity: 0;
+  }
+}
+
+/* Reduced motion: no particles, glows stay still */
+@media (prefers-reduced-motion: reduce) {
+  .living-bg__particles {
+    display: none;
+  }
+  .living-bg__glow {
+    animation: none;
+  }
+}

@@ -45,9 +45,7 @@ export function PickupPointSelect({
     if (!points) return [];
     const q = query.trim().toLowerCase();
     const list = q
-      ? points.filter(
-          (p) => p.name.toLowerCase().includes(q) || p.city.toLowerCase().includes(q),
-        )
+      ? points.filter((p) => p.name.toLowerCase().includes(q) || p.city.toLowerCase().includes(q))
       : points;
     return list.slice(0, 60);
   }, [points, query]);

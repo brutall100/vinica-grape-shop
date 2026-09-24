@@ -11,7 +11,7 @@ const variants: Record<ButtonVariant, string> = {
     "bg-wine-700 text-white hover:bg-wine-800 focus-visible:outline-wine-700 disabled:bg-stone-300",
   outline:
     "border border-stone-300 bg-white text-stone-800 hover:border-vine-600 hover:text-vine-700",
-  ghost: "text-stone-700 hover:bg-stone-100",
+  ghost: "btn-ghost text-stone-700 hover:bg-stone-100",
   danger: "bg-red-600 text-white hover:bg-red-700 disabled:bg-stone-300",
 };
 
@@ -23,7 +23,7 @@ const sizes: Record<ButtonSize, string> = {
 
 export function buttonClasses(variant: ButtonVariant = "primary", size: ButtonSize = "md") {
   return cn(
-    "inline-flex cursor-pointer items-center justify-center gap-2 rounded-full font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed",
+    "btn inline-flex cursor-pointer items-center justify-center gap-2 rounded-full font-semibold disabled:cursor-not-allowed",
     variants[variant],
     sizes[size],
   );

@@ -7,6 +7,7 @@ import { ShoppingBasket, Menu, X } from "lucide-react";
 import { useCart, cartCount } from "@/lib/cart-store";
 import { useHydrated } from "@/lib/use-hydrated";
 import { LanguageSwitcher } from "./language-switcher";
+import { ThemeToggle } from "@/components/effects/theme-toggle";
 import { GrapeMark } from "./logo";
 import { cn } from "@/lib/utils";
 
@@ -80,6 +81,7 @@ export function Header() {
 
         <div className="flex items-center gap-1">
           <LanguageSwitcher />
+          <ThemeToggle />
           <CartLink />
           <button
             type="button"
@@ -88,7 +90,11 @@ export function Header() {
             aria-label={menuOpen ? t("closeMenu") : t("openMenu")}
             aria-expanded={menuOpen}
           >
-            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {menuOpen ? (
+              <X className="h-5 w-5" aria-hidden />
+            ) : (
+              <Menu className="h-5 w-5" aria-hidden />
+            )}
           </button>
         </div>
       </div>

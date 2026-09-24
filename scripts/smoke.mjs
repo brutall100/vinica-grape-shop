@@ -51,7 +51,7 @@ await m.waitForTimeout(800);
 await m.click("li button >> text=Kauno AKROPOLIS");
 await shot(m, "05-mobile-checkout");
 
-const [orderNav] = await Promise.all([
+await Promise.all([
   m.waitForURL(/uzsakymas/, { timeout: 30000 }),
   m.click('button[type="submit"]'),
 ]);
