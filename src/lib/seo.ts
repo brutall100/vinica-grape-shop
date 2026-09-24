@@ -2,7 +2,15 @@ import type { Metadata } from "next";
 import { getPathname } from "@/i18n/navigation";
 import { locales, type Locale } from "@/i18n/routing";
 
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+/**
+ * Public address of the shop. Uses NEXT_PUBLIC_SITE_URL when set, otherwise the
+ * production domain Vercel provides automatically, otherwise localhost.
+ */
+export const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
 
 type Href = Parameters<typeof getPathname>[0]["href"];
 

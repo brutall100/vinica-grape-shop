@@ -147,10 +147,12 @@ nemokama **Neon** duomenų baze:
 1. Sukurkite PostgreSQL duomenų bazę [neon.tech](https://neon.tech) ir nusikopijuokite
    prisijungimo eilutę (connection string).
 2. Importuokite šią repozitoriją [vercel.com](https://vercel.com).
-3. **Project → Settings → Environment Variables** įrašykite visus kintamuosius iš
-   `.env.example` (`NEXT_PUBLIC_SITE_URL` = jūsų Vercel adresas).
-4. Vieną kartą paleiskite migracijas ir pradinius duomenis:
-   `DATABASE_URL=... npx prisma migrate deploy` ir `DATABASE_URL=... npx prisma db seed`.
+3. **Settings → Environment Variables** įrašykite kintamuosius iš `.env.example`
+   (bent `DATABASE_URL`, `AUTH_SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`).
+   `NEXT_PUBLIC_SITE_URL` neprivalomas: be jo naudojamas Vercel adresas.
+4. Paspauskite Deploy. Skriptas `vercel-build` pats sukuria lenteles (`prisma migrate deploy`)
+   ir į **tuščią** duomenų bazę įkelia pavyzdinius duomenis, todėl rankomis nieko leisti
+   nereikia. Serveris veikia Frankfurte (`vercel.json`), šalia Neon duomenų bazės.
 5. Nebūtina: Stripe skydelyje pridėkite webhook `https://<jūsų-domenas>/api/webhooks/stripe`
    (įvykiai `checkout.session.completed`, `checkout.session.expired`) ir jo raktą įrašykite į
    `STRIPE_WEBHOOK_SECRET`.

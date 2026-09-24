@@ -10,6 +10,7 @@ import { LivingBackground } from "@/components/effects/living-background";
 import { ThemeScript } from "@/components/effects/theme-script";
 import { UiEffects } from "@/components/effects/ui-effects";
 import "@/app/globals.css";
+import { siteUrl } from "@/lib/seo";
 
 const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
@@ -34,7 +35,6 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
   return {
     metadataBase: new URL(siteUrl),
@@ -65,7 +65,6 @@ export default async function LocaleLayout({
   setRequestLocale(locale as Locale);
   const tc = await getTranslations({ locale, namespace: "common" });
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
