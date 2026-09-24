@@ -154,7 +154,11 @@ function CategoryForm({
       <div className="mb-4 grid gap-4 sm:grid-cols-2">
         <div>
           <FieldLabel>Slug *</FieldLabel>
-          <Input value={slug} onChange={(e) => setSlug(e.target.value)} placeholder="pvz., vynines" />
+          <Input
+            value={slug}
+            onChange={(e) => setSlug(e.target.value)}
+            placeholder="pvz., vynines"
+          />
         </div>
         <div>
           <FieldLabel>Rikiavimo eilė</FieldLabel>
@@ -183,7 +187,9 @@ function CategoryForm({
       </div>
       <div className="space-y-4">
         <div>
-          <FieldLabel>Pavadinimas ({tab.toUpperCase()}){tab === "lt" && " *"}</FieldLabel>
+          <FieldLabel>
+            Pavadinimas ({tab.toUpperCase()}){tab === "lt" && " *"}
+          </FieldLabel>
           <Input value={name[tab]} onChange={(e) => setName({ ...name, [tab]: e.target.value })} />
         </div>
         <div>

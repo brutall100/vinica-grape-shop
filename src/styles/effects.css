@@ -1,0 +1,221 @@
+/* =====================================================================
+   Micro-interactions: focus, skip link, buttons, ripple, leaf cards,
+   scroll reveal and small vineyard-themed flourishes.
+   Colours come only from the palette variables in globals.css.
+   ===================================================================== */
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ---------- Skip link ---------- */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--surface);
+  font-weight: 700;
+  transform: translateY(-200%);
+  transition: transform 0.2s ease;
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* ---------- Buttons: lift, press, shadow, ripple ---------- */
+.btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 2px 6px var(--shadow);
+  transition:
+    transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+.btn:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px var(--shadow-accent);
+}
+.btn:not(:disabled):active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.btn-ghost {
+  box-shadow: none;
+}
+
+.ripple {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  background: var(--ripple);
+  pointer-events: none;
+  transform: scale(0);
+  animation: ripple 0.6s ease-out forwards;
+}
+@keyframes ripple {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Arrow nudges forward like a growing shoot */
+.btn .btn-arrow,
+.link-arrow .btn-arrow {
+  transition: transform 0.25s ease;
+}
+.btn:hover .btn-arrow,
+.link-arrow:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Add-to-cart: basket wiggles and a leaf sprouts out of the button */
+.basket-wiggle {
+  animation: basket-wiggle 0.5s ease;
+}
+@keyframes basket-wiggle {
+  25% {
+    transform: rotate(-14deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-6deg);
+  }
+}
+.sprout-pop {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  z-index: 1;
+  color: var(--vine-500);
+  pointer-events: none;
+  animation: sprout-pop 0.9s ease-out forwards;
+}
+@keyframes sprout-pop {
+  0% {
+    transform: translate(-50%, 10px) scale(0.3) rotate(0deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -38px) scale(1.1) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+/* ---------- Leaf cards: one sharp corner, lift on hover ---------- */
+.leaf-card {
+  border-radius: 1.5rem 1.5rem 1.5rem 0.375rem;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+a.leaf-card:hover,
+.leaf-card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px -12px var(--shadow-accent);
+  border-color: var(--vine-300);
+}
+
+/* Glassy panel that keeps text readable on top of the live background */
+.hero-panel {
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--stone-200);
+  border-radius: 2rem 2rem 2rem 0.5rem;
+  box-shadow: 0 24px 60px -30px var(--shadow);
+}
+
+/* Big hero vine gently swaying in the breeze */
+.hero-vine {
+  transform-origin: 50% 0%;
+  animation: vine-sway 9s ease-in-out infinite;
+}
+@keyframes vine-sway {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2.5deg);
+  }
+}
+.hero-vine .tendril {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: tendril-grow 3.5s 0.4s ease-out forwards;
+}
+@keyframes tendril-grow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---------- Scroll reveal (only when JS is running) ---------- */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0s);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Theme toggle: sun sets, moon rises ---------- */
+.theme-toggle svg {
+  transition:
+    transform 0.4s ease,
+    opacity 0.3s ease;
+}
+.theme-toggle .icon-sun {
+  position: absolute;
+}
+:root[data-theme="dark"] .theme-toggle .icon-sun,
+:root:not([data-theme="dark"]) .theme-toggle .icon-moon {
+  transform: rotate(-90deg) scale(0.4);
+  opacity: 0;
+}
+
+/* ---------- Reduced motion: switch movement off ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+  .hero-vine .tendril {
+    stroke-dashoffset: 0;
+  }
+  .btn:not(:disabled):hover,
+  a.leaf-card:hover {
+    transform: none;
+  }
+}

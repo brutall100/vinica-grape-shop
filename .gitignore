@@ -30,8 +30,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files (the example file is safe to commit)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -40,8 +41,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local env
-.env
 
 # local uploads
 /public/uploads/*

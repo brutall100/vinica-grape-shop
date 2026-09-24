@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
+import { ThemeScript } from "@/components/effects/theme-script";
 import "@/app/globals.css";
 
 const manrope = Manrope({
@@ -15,7 +16,10 @@ export const metadata: Metadata = {
 
 export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="lt" className={manrope.variable}>
+    <html lang="lt" data-theme="light" className={manrope.variable} suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body className="min-h-screen bg-stone-100 font-sans text-stone-900 antialiased">
         {children}
       </body>

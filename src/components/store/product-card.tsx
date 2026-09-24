@@ -23,7 +23,7 @@ export async function ProductCard({
   return (
     <Link
       href={{ pathname: "/products/[slug]", params: { slug: product.slug } }}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white transition-shadow hover:shadow-lg"
+      className="group leaf-card flex w-full flex-col overflow-hidden border border-stone-200 bg-white"
     >
       <div className="relative aspect-square overflow-hidden bg-cream-dark">
         {image && (

@@ -6,10 +6,7 @@ export function shippingCostCents(
   subtotalCents: number,
   settings: StoreSettings,
 ): number {
-  if (
-    settings.freeShippingFromCents != null &&
-    subtotalCents >= settings.freeShippingFromCents
-  ) {
+  if (settings.freeShippingFromCents != null && subtotalCents >= settings.freeShippingFromCents) {
     return 0;
   }
   switch (method) {

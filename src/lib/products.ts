@@ -81,3 +81,13 @@ export async function getCategories() {
 }
 
 export type CatalogProduct = Awaited<ReturnType<typeof getCatalogProducts>>[number];
+
+/** Numbers shown in the home page hero (they count up on screen). */
+export async function getStoreStats() {
+  const [varieties, frost, categories] = await Promise.all([
+    prisma.product.count({ where: { published: true } }),
+    prisma.product.aggregate({ where: { published: true }, _min: { frostResistance: true } }),
+    prisma.category.count(),
+  ]);
+  return { varieties, coldestFrost: frost._min.frostResistance, categories };
+}

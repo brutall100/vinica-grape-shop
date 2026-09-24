@@ -33,7 +33,9 @@ export function ProductGallery({ images, name }: { images: Img[]; name: string }
               onClick={() => setActive(i)}
               className={cn(
                 "relative h-18 w-18 shrink-0 cursor-pointer overflow-hidden rounded-lg border-2",
-                i === active ? "border-vine-600" : "border-transparent opacity-70 hover:opacity-100",
+                i === active
+                  ? "border-vine-600"
+                  : "border-transparent opacity-70 hover:opacity-100",
               )}
               aria-label={`${name} ${i + 1}`}
             >

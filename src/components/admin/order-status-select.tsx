@@ -14,13 +14,7 @@ const options: { value: OrderStatus; label: string }[] = [
   { value: "CANCELLED", label: "Atšauktas" },
 ];
 
-export function OrderStatusSelect({
-  orderId,
-  status,
-}: {
-  orderId: string;
-  status: OrderStatus;
-}) {
+export function OrderStatusSelect({ orderId, status }: { orderId: string; status: OrderStatus }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
 

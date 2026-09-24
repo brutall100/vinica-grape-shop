@@ -375,7 +375,7 @@ async function main() {
   await prisma.storeSettings.upsert({
     where: { id: "main" },
     update: {},
-    create: { id: "main", contactEmail: "info@vinica.lt", contactPhone: "+370 600 00000" },
+    create: { id: "main", contactEmail: "info@example.com", contactPhone: "+370 600 00000" },
   });
 
   // Admin user

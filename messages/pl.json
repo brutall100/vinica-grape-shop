@@ -12,7 +12,8 @@
     "viewAll": "Zobacz wszystkie",
     "loading": "Ładowanie...",
     "error": "Wystąpił błąd. Spróbuj ponownie.",
-    "sale": "Promocja"
+    "sale": "Promocja",
+    "skipToContent": "Przejdź do treści"
   },
   "nav": {
     "home": "Strona główna",
@@ -21,7 +22,8 @@
     "delivery": "Dostawa",
     "cart": "Koszyk",
     "openMenu": "Otwórz menu",
-    "closeMenu": "Zamknij menu"
+    "closeMenu": "Zamknij menu",
+    "toggleTheme": "Przełącz tryb jasny / ciemny"
   },
   "home": {
     "heroTitle": "Załóż własną winnicę",
@@ -41,7 +43,10 @@
     "why4Text": "Starannie pakujemy sadzonki i dostarczamy do paczkomatów lub kurierem w 1–3 dni robocze.",
     "ctaTitle": "Nie wiesz, od czego zacząć?",
     "ctaText": "Napisz do nas – pomożemy dobrać odmiany do warunków Twojego ogrodu i Twoich oczekiwań.",
-    "ctaButton": "Kontakt"
+    "ctaButton": "Kontakt",
+    "statVarieties": "odmian winorośli",
+    "statFrost": "wytrzymuje najbardziej mrozoodporna odmiana",
+    "statCategories": "kategorie"
   },
   "catalog": {
     "title": "Katalog sadzonek winorośli",

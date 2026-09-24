@@ -55,7 +55,12 @@ export function CheckoutForm({ prices }: { prices: ShippingPrices }) {
 
   const methods: { value: ShippingMethod; label: string; icon: typeof Package; price: number }[] = [
     { value: "OMNIVA", label: t("shippingOmniva"), icon: Package, price: prices.omnivaCents },
-    { value: "LP_EXPRESS", label: t("shippingLpexpress"), icon: Package, price: prices.lpExpressCents },
+    {
+      value: "LP_EXPRESS",
+      label: t("shippingLpexpress"),
+      icon: Package,
+      price: prices.lpExpressCents,
+    },
     { value: "COURIER", label: t("shippingCourier"), icon: Truck, price: prices.courierCents },
   ];
 
@@ -129,27 +134,47 @@ export function CheckoutForm({ prices }: { prices: ShippingPrices }) {
   };
 
   return (
-    <form onSubmit={submit} className="grid gap-8 lg:grid-cols-[1fr_24rem] lg:items-start" noValidate>
+    <form
+      onSubmit={submit}
+      className="grid gap-8 lg:grid-cols-[1fr_24rem] lg:items-start"
+      noValidate
+    >
       <div className="space-y-8">
         {/* Contact */}
         <section className="rounded-2xl border border-stone-200 bg-white p-5 sm:p-6">
-          <h2 className="mb-4 font-display text-xl font-bold text-stone-900">
-            {t("contactInfo")}
-          </h2>
+          <h2 className="mb-4 font-display text-xl font-bold text-stone-900">{t("contactInfo")}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="sm:col-span-2">
               <FieldLabel htmlFor="co-name">{t("name")}</FieldLabel>
-              <Input id="co-name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" />
+              <Input
+                id="co-name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                autoComplete="name"
+              />
               <FieldError>{err("name")}</FieldError>
             </div>
             <div>
               <FieldLabel htmlFor="co-email">{t("email")}</FieldLabel>
-              <Input id="co-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
+              <Input
+                id="co-email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+              />
               <FieldError>{err("email")}</FieldError>
             </div>
             <div>
               <FieldLabel htmlFor="co-phone">{t("phone")}</FieldLabel>
-              <Input id="co-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" placeholder="+370" />
+              <Input
+                id="co-phone"
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                autoComplete="tel"
+                placeholder="+370"
+              />
               <FieldError>{err("phone")}</FieldError>
             </div>
           </div>
@@ -213,17 +238,33 @@ export function CheckoutForm({ prices }: { prices: ShippingPrices }) {
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               <div className="sm:col-span-2">
                 <FieldLabel htmlFor="co-address">{t("address")}</FieldLabel>
-                <Input id="co-address" value={address} onChange={(e) => setAddress(e.target.value)} autoComplete="street-address" />
+                <Input
+                  id="co-address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  autoComplete="street-address"
+                />
                 <FieldError>{err("address")}</FieldError>
               </div>
               <div>
                 <FieldLabel htmlFor="co-city">{t("city")}</FieldLabel>
-                <Input id="co-city" value={city} onChange={(e) => setCity(e.target.value)} autoComplete="address-level2" />
+                <Input
+                  id="co-city"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  autoComplete="address-level2"
+                />
                 <FieldError>{err("city")}</FieldError>
               </div>
               <div>
                 <FieldLabel htmlFor="co-postal">{t("postalCode")}</FieldLabel>
-                <Input id="co-postal" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} autoComplete="postal-code" placeholder="LT-" />
+                <Input
+                  id="co-postal"
+                  value={postalCode}
+                  onChange={(e) => setPostalCode(e.target.value)}
+                  autoComplete="postal-code"
+                  placeholder="LT-"
+                />
                 <FieldError>{err("postalCode")}</FieldError>
               </div>
             </div>
@@ -231,7 +272,12 @@ export function CheckoutForm({ prices }: { prices: ShippingPrices }) {
 
           <div className="mt-4">
             <FieldLabel htmlFor="co-note">{t("note")}</FieldLabel>
-            <Textarea id="co-note" value={note} onChange={(e) => setNote(e.target.value)} rows={2} />
+            <Textarea
+              id="co-note"
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              rows={2}
+            />
           </div>
         </section>
 

@@ -2,9 +2,7 @@ import type { Order, OrderItem } from "@prisma/client";
 
 export type OrderWithItems = Order & { items: OrderItem[] };
 
-export type CreatePaymentResult =
-  | { kind: "redirect"; url: string }
-  | { kind: "not-configured" };
+export type CreatePaymentResult = { kind: "redirect"; url: string } | { kind: "not-configured" };
 
 export interface PaymentProvider {
   /** Machine name stored on the order (PaymentMethod enum value). */

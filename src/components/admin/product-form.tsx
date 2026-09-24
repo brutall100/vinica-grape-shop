@@ -193,11 +193,18 @@ export function ProductForm({
           </div>
           <div className="space-y-4">
             <div>
-              <FieldLabel>Pavadinimas ({tab.toUpperCase()}){tab === "lt" && " *"}</FieldLabel>
-              <Input value={form.name[tab]} onChange={(e) => setLocalized("name", e.target.value)} />
+              <FieldLabel>
+                Pavadinimas ({tab.toUpperCase()}){tab === "lt" && " *"}
+              </FieldLabel>
+              <Input
+                value={form.name[tab]}
+                onChange={(e) => setLocalized("name", e.target.value)}
+              />
             </div>
             <div>
-              <FieldLabel>Aprašymas ({tab.toUpperCase()}){tab === "lt" && " *"}</FieldLabel>
+              <FieldLabel>
+                Aprašymas ({tab.toUpperCase()}){tab === "lt" && " *"}
+              </FieldLabel>
               <Textarea
                 rows={5}
                 value={form.description[tab]}
@@ -278,15 +285,22 @@ export function ProductForm({
         <section className="rounded-2xl border border-stone-200 bg-white p-5">
           <h2 className="mb-4 font-bold">Nuotraukos</h2>
           {!form.id ? (
-            <p className="text-sm text-stone-500">
-              Nuotraukas galėsite įkelti išsaugoję produktą.
-            </p>
+            <p className="text-sm text-stone-500">Nuotraukas galėsite įkelti išsaugoję produktą.</p>
           ) : (
             <>
               <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6">
                 {images.map((img) => (
-                  <div key={img.id} className="group relative aspect-square overflow-hidden rounded-xl border border-stone-200">
-                    <Image src={img.url} alt={img.alt} fill sizes="120px" className="object-cover" />
+                  <div
+                    key={img.id}
+                    className="group relative aspect-square overflow-hidden rounded-xl border border-stone-200"
+                  >
+                    <Image
+                      src={img.url}
+                      alt={img.alt}
+                      fill
+                      sizes="120px"
+                      className="object-cover"
+                    />
                     <button
                       type="button"
                       onClick={async () => {
@@ -307,7 +321,9 @@ export function ProductForm({
                   className="flex aspect-square cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border-2 border-dashed border-stone-300 text-stone-400 hover:border-vine-500 hover:text-vine-600"
                 >
                   <Upload className="h-5 w-5" aria-hidden />
-                  <span className="text-xs font-semibold">{uploading ? "Keliama..." : "Įkelti"}</span>
+                  <span className="text-xs font-semibold">
+                    {uploading ? "Keliama..." : "Įkelti"}
+                  </span>
                 </button>
               </div>
               <input

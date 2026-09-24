@@ -30,7 +30,10 @@ export function FieldLabel({
   className?: string;
 }) {
   return (
-    <label htmlFor={htmlFor} className={cn("mb-1.5 block text-sm font-semibold text-stone-700", className)}>
+    <label
+      htmlFor={htmlFor}
+      className={cn("mb-1.5 block text-sm font-semibold text-stone-700", className)}
+    >
       {children}
     </label>
   );

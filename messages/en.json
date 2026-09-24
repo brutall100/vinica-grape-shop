@@ -12,7 +12,8 @@
     "viewAll": "View all",
     "loading": "Loading...",
     "error": "Something went wrong. Please try again.",
-    "sale": "Sale"
+    "sale": "Sale",
+    "skipToContent": "Skip to content"
   },
   "nav": {
     "home": "Home",
@@ -21,7 +22,8 @@
     "delivery": "Delivery",
     "cart": "Cart",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "toggleTheme": "Toggle light / dark mode"
   },
   "home": {
     "heroTitle": "Grow your own vineyard",
@@ -41,7 +43,10 @@
     "why4Text": "We pack seedlings carefully and deliver via parcel lockers or courier within 1–3 working days.",
     "ctaTitle": "Not sure where to start?",
     "ctaText": "Write to us – we will help you pick varieties for your garden's conditions and your goals.",
-    "ctaButton": "Contact us"
+    "ctaButton": "Contact us",
+    "statVarieties": "grape varieties",
+    "statFrost": "hardiest variety withstands",
+    "statCategories": "categories"
   },
   "catalog": {
     "title": "Grapevine seedling catalog",

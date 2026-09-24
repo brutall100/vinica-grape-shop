@@ -23,8 +23,7 @@ export function SettingsForm({ initial }: Props) {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
-  const set = (key: keyof typeof form, value: string) =>
-    setForm((f) => ({ ...f, [key]: value }));
+  const set = (key: keyof typeof form, value: string) => setForm((f) => ({ ...f, [key]: value }));
 
   function toCents(value: string): number | null {
     const trimmed = value.trim().replace(",", ".");
@@ -68,19 +67,35 @@ export function SettingsForm({ initial }: Props) {
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <FieldLabel>Omniva paštomatas €</FieldLabel>
-            <Input inputMode="decimal" value={form.omnivaEur} onChange={(e) => set("omnivaEur", e.target.value)} />
+            <Input
+              inputMode="decimal"
+              value={form.omnivaEur}
+              onChange={(e) => set("omnivaEur", e.target.value)}
+            />
           </div>
           <div>
             <FieldLabel>LP Express paštomatas €</FieldLabel>
-            <Input inputMode="decimal" value={form.lpExpressEur} onChange={(e) => set("lpExpressEur", e.target.value)} />
+            <Input
+              inputMode="decimal"
+              value={form.lpExpressEur}
+              onChange={(e) => set("lpExpressEur", e.target.value)}
+            />
           </div>
           <div>
             <FieldLabel>Kurjeris €</FieldLabel>
-            <Input inputMode="decimal" value={form.courierEur} onChange={(e) => set("courierEur", e.target.value)} />
+            <Input
+              inputMode="decimal"
+              value={form.courierEur}
+              onChange={(e) => set("courierEur", e.target.value)}
+            />
           </div>
           <div>
             <FieldLabel>Nemokamas pristatymas nuo € (tuščia – išjungta)</FieldLabel>
-            <Input inputMode="decimal" value={form.freeFromEur} onChange={(e) => set("freeFromEur", e.target.value)} />
+            <Input
+              inputMode="decimal"
+              value={form.freeFromEur}
+              onChange={(e) => set("freeFromEur", e.target.value)}
+            />
           </div>
         </div>
       </section>
@@ -90,11 +105,18 @@ export function SettingsForm({ initial }: Props) {
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <FieldLabel>El. paštas</FieldLabel>
-            <Input type="email" value={form.contactEmail} onChange={(e) => set("contactEmail", e.target.value)} />
+            <Input
+              type="email"
+              value={form.contactEmail}
+              onChange={(e) => set("contactEmail", e.target.value)}
+            />
           </div>
           <div>
             <FieldLabel>Telefonas</FieldLabel>
-            <Input value={form.contactPhone} onChange={(e) => set("contactPhone", e.target.value)} />
+            <Input
+              value={form.contactPhone}
+              onChange={(e) => set("contactPhone", e.target.value)}
+            />
           </div>
         </div>
       </section>

@@ -36,12 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     entry("/", now, "daily", 1),
     entry("/catalog", now, "daily", 0.9),
     ...products.map((p) =>
-      entry(
-        { pathname: "/products/[slug]", params: { slug: p.slug } },
-        p.updatedAt,
-        "weekly",
-        0.8,
-      ),
+      entry({ pathname: "/products/[slug]", params: { slug: p.slug } }, p.updatedAt, "weekly", 0.8),
     ),
     entry("/about", now, "monthly", 0.5),
     entry("/delivery", now, "monthly", 0.5),

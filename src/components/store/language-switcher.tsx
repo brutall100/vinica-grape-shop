@@ -49,7 +49,10 @@ export function LanguageSwitcher() {
       >
         <Globe className="h-4 w-4" aria-hidden />
         {labels[locale]}
-        <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} aria-hidden />
+        <ChevronDown
+          className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")}
+          aria-hidden
+        />
       </button>
       {open && (
         <ul

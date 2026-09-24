@@ -12,7 +12,8 @@
     "viewAll": "Žiūrėti visus",
     "loading": "Kraunama...",
     "error": "Įvyko klaida. Bandykite dar kartą.",
-    "sale": "Akcija"
+    "sale": "Akcija",
+    "skipToContent": "Pereiti prie turinio"
   },
   "nav": {
     "home": "Pradžia",
@@ -21,7 +22,8 @@
     "delivery": "Pristatymas",
     "cart": "Krepšelis",
     "openMenu": "Atidaryti meniu",
-    "closeMenu": "Uždaryti meniu"
+    "closeMenu": "Uždaryti meniu",
+    "toggleTheme": "Perjungti šviesų / tamsų režimą"
   },
   "home": {
     "heroTitle": "Užsiauginkite savo vynuogyną",
@@ -41,7 +43,10 @@
     "why4Text": "Sodinukus kruopščiai supakuojame ir pristatome per paštomatus arba kurjeriu per 1–3 d. d.",
     "ctaTitle": "Nežinote, nuo ko pradėti?",
     "ctaText": "Parašykite mums – padėsime išsirinkti veisles pagal jūsų sodo sąlygas ir lūkesčius.",
-    "ctaButton": "Susisiekti"
+    "ctaButton": "Susisiekti",
+    "statVarieties": "vynuogių veislių",
+    "statFrost": "atspariausia veislė šalčiui",
+    "statCategories": "kategorijos"
   },
   "catalog": {
     "title": "Vynuogių sodinukų katalogas",

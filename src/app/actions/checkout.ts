@@ -11,8 +11,7 @@ import { getPathname } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 
 export type CheckoutResult =
-  | { ok: true; redirectUrl: string }
-  | { ok: false; error: string; field?: string };
+  { ok: true; redirectUrl: string } | { ok: false; error: string; field?: string };
 
 export async function placeOrder(input: CheckoutInput): Promise<CheckoutResult> {
   const parsed = checkoutSchema.safeParse(input);

@@ -37,7 +37,9 @@ export const useCart = create<CartState>()(
               ),
             };
           }
-          return { items: [...state.items, { ...item, quantity: Math.min(quantity, item.maxStock) }] };
+          return {
+            items: [...state.items, { ...item, quantity: Math.min(quantity, item.maxStock) }],
+          };
         }),
       setQuantity: (productId, quantity) =>
         set((state) => ({

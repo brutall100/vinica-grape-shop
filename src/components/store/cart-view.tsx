@@ -51,7 +51,13 @@ export function CartView({ locale }: { locale: string }) {
                 className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-cream-dark"
               >
                 {item.image && (
-                  <Image src={item.image} alt={item.name} fill sizes="96px" className="object-cover" />
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    sizes="96px"
+                    className="object-cover"
+                  />
                 )}
               </Link>
               <div className="flex flex-1 flex-col">

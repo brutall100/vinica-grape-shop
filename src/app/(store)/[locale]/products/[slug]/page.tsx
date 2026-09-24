@@ -27,7 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const languages: Record<string, string> = {};
   for (const l of locales) {
     languages[l] =
-      siteUrl + getPathname({ locale: l, href: { pathname: "/products/[slug]", params: { slug } } });
+      siteUrl +
+      getPathname({ locale: l, href: { pathname: "/products/[slug]", params: { slug } } });
   }
 
   return {
@@ -72,7 +73,11 @@ export default async function ProductPage({ params }: Props) {
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   const productUrl =
-    siteUrl + getPathname({ locale: locale as never, href: { pathname: "/products/[slug]", params: { slug } } });
+    siteUrl +
+    getPathname({
+      locale: locale as never,
+      href: { pathname: "/products/[slug]", params: { slug } },
+    });
 
   const jsonLd = {
     "@context": "https://schema.org",
