@@ -9,6 +9,7 @@ import { sendOrderConfirmation } from "@/lib/email";
 import { pickLocale } from "@/lib/localized";
 import { getPathname } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import { siteUrl } from "@/lib/seo";
 
 export type CheckoutResult =
   { ok: true; redirectUrl: string } | { ok: false; error: string; field?: string };
@@ -102,7 +103,6 @@ export async function placeOrder(input: CheckoutInput): Promise<CheckoutResult> 
     include: { items: true },
   });
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   const orderPath = getPathname({
     locale: data.locale as Locale,
     href: { pathname: "/order/[id]", params: { id: order.id } },

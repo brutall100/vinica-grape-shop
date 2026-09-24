@@ -371,6 +371,13 @@ const products: SeedProduct[] = [
 ];
 
 async function main() {
+  // On Vercel the seed runs during every build: only fill an empty database,
+  // so products edited in the admin panel are never overwritten.
+  if (process.env.SEED_ONLY_IF_EMPTY === "1" && (await prisma.product.count()) > 0) {
+    console.log("Database already has products — skipping seed.");
+    return;
+  }
+
   // Store settings singleton
   await prisma.storeSettings.upsert({
     where: { id: "main" },
@@ -380,7 +387,10 @@ async function main() {
 
   // Admin user
   const adminEmail = process.env.ADMIN_EMAIL ?? "admin@example.com";
-  const adminPassword = process.env.ADMIN_PASSWORD ?? "change-me";
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  if (!adminPassword) {
+    throw new Error("Set ADMIN_PASSWORD (see .env.example) before seeding.");
+  }
   await prisma.user.upsert({
     where: { email: adminEmail },
     update: {},

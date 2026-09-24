@@ -137,10 +137,12 @@ database:
 
 1. Create a PostgreSQL database on [neon.tech](https://neon.tech) and copy its connection string.
 2. Import this repository on [vercel.com](https://vercel.com).
-3. Add every variable from `.env.example` in **Project → Settings → Environment Variables**
-   (`NEXT_PUBLIC_SITE_URL` = your Vercel address).
-4. Run migrations and seed once: `DATABASE_URL=... npx prisma migrate deploy` and
-   `DATABASE_URL=... npx prisma db seed`.
+3. Add the variables from `.env.example` in **Settings → Environment Variables**
+   (at least `DATABASE_URL`, `AUTH_SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`).
+   `NEXT_PUBLIC_SITE_URL` is optional: without it the Vercel domain is used.
+4. Deploy. The `vercel-build` script creates the tables (`prisma migrate deploy`) and fills an
+   **empty** database with demo data, so nothing has to be run by hand. Functions run in
+   Frankfurt (`vercel.json`), next to the Neon database.
 5. Optional: add a Stripe webhook to `https://<your-domain>/api/webhooks/stripe`
    (events `checkout.session.completed`, `checkout.session.expired`) and put its secret in
    `STRIPE_WEBHOOK_SECRET`.

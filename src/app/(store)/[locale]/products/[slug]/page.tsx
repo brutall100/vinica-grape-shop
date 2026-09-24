@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { ChevronRight, Snowflake } from "lucide-react";
 import { getPathname } from "@/i18n/navigation";
 import { locales } from "@/i18n/routing";
+import { siteUrl } from "@/lib/seo";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -22,7 +23,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const name = pickLocale(product.name, locale);
   const description = pickLocale(product.description, locale).slice(0, 160);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
   const languages: Record<string, string> = {};
   for (const l of locales) {
@@ -71,7 +71,6 @@ export default async function ProductPage({ params }: Props) {
     [ta("seedless"), product.seedless ? ta("yes") : ta("no")],
   ];
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   const productUrl =
     siteUrl +
     getPathname({
