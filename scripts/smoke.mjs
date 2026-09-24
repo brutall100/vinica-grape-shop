@@ -1,12 +1,12 @@
 import { chromium } from "playwright-core";
 import { mkdirSync } from "node:fs";
 
-const BASE = "http://127.0.0.1:3000";
-const OUT = process.env.SHOT_DIR;
+const BASE = process.env.BASE_URL ?? "http://127.0.0.1:3000";
+const OUT = process.env.SHOT_DIR ?? "shots";
 mkdirSync(OUT, { recursive: true });
 
 const browser = await chromium.launch({
-  executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome",
+  executablePath: process.env.CHROMIUM_PATH || undefined,
   args: ["--no-sandbox"],
 });
 
