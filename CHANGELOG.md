@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/brutall100/vinica-grape-shop/compare/v1.0.0...v1.1.0) (2026-09-24)
+
+
+### Features
+
+* zero-setup Vercel deploy (auto migrations, one-time seed, Frankfurt region) ([#2](https://github.com/brutall100/vinica-grape-shop/issues/2)) ([08f3036](https://github.com/brutall100/vinica-grape-shop/commit/08f3036ef5caec8dd832b7f1371ca87a68317326))
+
 # 1.0.0 (2026-09-24)
 
 
